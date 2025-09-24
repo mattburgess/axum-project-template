@@ -27,11 +27,11 @@ concurrency:
 jobs:
   # Build job
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       MDBOOK_VERSION: 0.4.52
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install mdBook
         run: |
           sudo rm /var/lib/man-db/auto-update # avoid wasting time processing triggers for man-db when installing packages
@@ -44,7 +44,7 @@ jobs:
       - name: Build with mdBook
         run: mdbook build book -d rendered
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./book/rendered
 
@@ -53,7 +53,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     steps:
       - name: Deploy to GitHub Pages
