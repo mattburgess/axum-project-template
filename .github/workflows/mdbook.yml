@@ -34,8 +34,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install mdBook
         run: |
-          sudo apt-get update
-          sudo apt-get install cargo
+          sudo rm /var/lib/man-db/auto-update # avoid wasting time processing triggers for man-db when installing packages
+          sudo apt-get install -y cargo
           curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
           cargo binstall mdbook@${MDBOOK_VERSION}
       - name: Setup Pages
