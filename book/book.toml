@@ -1,0 +1,5 @@
+[book]
+authors = ["Matthew Burgess"]
+language = "en"
+src = "src"
+title = "Axum Project Template"
